@@ -1,6 +1,13 @@
-import sqlite3 
+import sqlite3                    # Driver do SQLite já vem no Python
+from pathlib import Path          # Manipula caminhos de arquivos
 
 DB_PATH = 'src/alunos.db'
+
+def get_connection():
+    """Abre uma conexão SQLite e liga as chaves estrangeiras."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
 
 def criar_tabela_aluno():
     conexao = sqlite3.connect(DB_PATH)

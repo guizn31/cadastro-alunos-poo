@@ -10,20 +10,17 @@ def get_connection():
     return conn
 
 def criar_tabela_aluno():
-    conexao = sqlite3.connect(DB_PATH)
-    cursor = conexao.cursor()
+    conn = get_connection()
+    cursor = conn.cursor()
 
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Aluno (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         cpf TEXT UNIQUE NOT NULL,
-        data_nascimento TEXT NOT NULL,
-        telefone TEXT
-    );
-    ''')
-    conexao.commit()
-    conexao.close()
+        data_nascimento TEXT NOT NULL)''')
+    conn.commit()
+    conn.close()
 
 if __name__ == '__main__':
     criar_tabela_aluno()

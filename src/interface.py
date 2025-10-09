@@ -48,11 +48,11 @@ def criar_janela_principal():
     def carregar_lista():
         for item in tabela.get_children():
             tabela.delete(item)
-    try:
-        for a in Crud.read_alunos():  # retorno esperado: (id, nome, cpf, data_nascimento, status)
-            tabela.insert("", "end", values=(a[0], a[1], a[2], a[3], a[4]))
-    except Exception as e:
-        messagebox.showerror("Erro", f"Falha ao carregar lista: {e}")
+        try:
+            for a in Crud.read_alunos():  # retorno esperado: (id, nome, cpf, data_nascimento, status)
+                tabela.insert("", "end", values=(a[0], a[1], a[2], a[3], a[4]))
+        except Exception as e:
+            messagebox.showerror("Erro", f"Falha ao carregar lista: {e}")
     
     def cadastrar():
         nome = entrada_nome.get().strip()

@@ -1,6 +1,6 @@
 # cadastro-alunos-poo
 
-## README — Manual de uso do sistema de cadastro de alunos EducaTech
+### README — Manual de uso do sistema de cadastro de alunos EducaTech
 ## 1. Sobre o Sistema:
 ## O sistema de cadastro de alunos, Educa tec, está desenvolvido em Python, utiliza uma biblioteca Tkinter para a interface gráfica e para o banco de dados  usa-se SQLite.
 

@@ -7,6 +7,16 @@ def criar_janela_principal():
     janela.title("Sistema de Cadastro de Alunos - TechEduca")
     janela.geometry("600x500") # Define o tamanho da janela
     janela.configure(bg="#f0f0f0") # Define a cor de fundo da janela
+    # centraliza a janela
+    janela.configure(bg="#00fa9a")
+    janela.minsize(500, 500)
+
+    colunas = ("id", "nome", "cpf", "data_nascimento", "status")
+    tabela = ttk.Treeview(janela, columns=colunas, show="headings", height=10)
+    for c in colunas:
+        tabela.heading(c, text=c.title())
+        tabela.column(c, width=120 if c != "id" else 60, anchor="center")
+    tabela.pack(pady=10, fill="both", expand=True)
 
     # --- BARRA DE RELATÓRIOS (FILTROS) ---
     barra = tk.Frame(janela, bg="#f0f0f0")
@@ -38,25 +48,26 @@ def criar_janela_principal():
     tabela.pack(pady=10, fill="both", expand=True)
 
     # Adiciona o texto de identificação da tela
-    tk.Label(janela, text="Cadastro de Alunos", font=("Arial", 16, "bold"), bg="#f0f0f0").pack(pady=10)
+    tk.Label(janela, text="Cadastro de Alunos", font=("Arial", 16, "bold"), bg="#13ee9a").pack(pady=10)
 
     # Adiciona o texto indicando onde vai ser preenchido o nome do aluno
-    tk.Label(janela, text="Nome do Aluno:", bg="#f0f0f0").pack()
+    tk.Label(janela, text="Nome do Aluno:", bg="#00fa9a").pack()
     entrada_nome = tk.Entry(janela, width=40) # Variável que cria o widget para preencher o nome do aluno
     entrada_nome.pack(pady=5) # Cria a orientação do widget
 
     # Adiciona o texto indicando onde vai ser preenchido o cpf do aluno
-    tk.Label(janela, text="CPF:", bg="#f0f0f0").pack() 
+    tk.Label(janela, text="CPF:", bg="#00fa9a").pack() 
     entrada_cpf = tk.Entry(janela, width=40) # Variável que cria o widget para preencher o nome do aluno
     entrada_cpf.pack(pady=5) # Cria a orientação do widget
 
     # Adiciona o texto indicando onde vai ser preenchido o cpf do aluno
     tk.Label(janela, text="Data de Nascimento:", bg="#f0f0f0").pack() 
+    tk.Label(janela, text="Data de Nascimento:", bg="#00fa9a").pack() 
     entrada_data_nascimento = tk.Entry(janela, width=40) # Variável que cria o widget para preencher o nome do aluno
     entrada_data_nascimento.pack(pady=5) # Cria a orientação do widget
 
     # Adiciona o texto indicando onde vai ser preenchido o status do aluno
-    tk.Label(janela, text="Status (Ativo/Inativo):", bg="#f0f0f0").pack()
+    tk.Label(janela, text="Status (Ativo/Inativo):", bg="#00fa9a").pack()
     entrada_status = tk.Entry(janela, width=40) # Variável que cria o widget para preencher o status do aluno
     entrada_status.pack(pady=5) # Cria a orientação do widget
 
@@ -74,6 +85,11 @@ def criar_janela_principal():
             tabela.insert("", "end", values=(a[0], a[1], a[2], a[3], a[4]))
     except Exception as e:
         messagebox.showerror("Erro", f"Falha ao carregar lista: {e}")
+        try:
+            for a in Crud.read_alunos():  # retorno esperado: (id, nome, cpf, data_nascimento, status)
+                tabela.insert("", "end", values=(a[0], a[1], a[2], a[3], a[4]))
+        except Exception as e:
+            messagebox.showerror("Erro", f"Falha ao carregar lista: {e}")
     
     def cadastrar():
         nome = entrada_nome.get().strip()
@@ -171,3 +187,6 @@ def criar_janela_principal():
 
 if __name__ == "__main__":
     criar_janela_principal()
+
+
+    
